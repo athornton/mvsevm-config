@@ -1,0 +1,7 @@
+tap0: ITS
+tap1: TOPS-20
+tap2: VMS
+tap3: 4.3bsd
+tap4: 2.11bsd
+tap5: rsx11m+
+

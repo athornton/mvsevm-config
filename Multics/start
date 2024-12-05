@@ -1,0 +1,15 @@
+#!/bin/sh
+# Daemonize the port forwarder
+fwd="/usr/bin/socat"
+fwd="${fwd} -d -d TCP4-LISTEN:6181,bind=192.168.248.45,fork TCP:localhost:6180"
+dwork=/var/log/socat
+ename=$(basename $(pwd))
+b=${dwork}/${ename}
+daemonize -v -c ${dwork} -e ${b}.err -o ${b}.out -l ${b}.lock -p ${b}.pid \
+	  ${fwd}
+
+# Start the Multics emulator
+./dps8 boot.ini
+
+# After it exits, kill the port forwarder
+kill $(cat ${b}.pid)
